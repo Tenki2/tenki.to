@@ -1,54 +1,30 @@
-<!-- 
- I am not a frontend dev, my bestie chat-GPT helped with this project (-‿◦☀)
- Mobile version is strechy :(
--->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>My Main Page</title>
+    <script defer src="https://eu.umami.is/script.js" data-website-id="e077c4f4-6e9a-45dc-8e6c-62a369bca512"></script>
+    <title>My test Page</title>
     <style>
         @keyframes scrollBg {
             0% {
-                background-position: 0 0;
+                background-position: var(--bg-position) 0;
             }
             100% {
-                background-position: -200% 0;
+                background-position: calc(var(--bg-position) + 100%) 0;
             }
         }
 
         body {
-            --bg-position: 0;
+            --bg-position: 0%;
             background: linear-gradient(rgba(255, 255, 194, 0.5), rgba(255, 255, 194, 0.5)), 
-                        url('collage.png') repeat-x;
-            animation: scrollBg 35s linear infinite;
-            background-size: 200% 100%; /* Keeps the background consistent across wide screens */
-            background-repeat: repeat-x;
+                        url('testlong.png') repeat-x;
+            animation: scrollBg 60s linear infinite;
+            background-size: auto 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-attachment: fixed; /* Keeps the background fixed during scroll */
         }
-
-        /* Mobile-specific adjustments */
-        @media (max-width: 768px) {
-            body {
-                background-size: auto 200%; /* Adjust background size for smaller screens */
-                animation: scrollBg 30s linear infinite; /* Slower scroll on mobile */
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                background-size: auto 300%; /* Further adjust for very small screens */
-                animation: scrollBg 40s linear infinite; /* Even slower scroll on very small screens */
-            }
-        }
-
-
-
 
         .center-div {
             text-align: center;
@@ -102,18 +78,19 @@
     <div class="center-div">
         <h1>Welcome to tenki.to</h1>
         <p>Basic prototyping stage<p>
-        <!--<a href="test.html">Go to Test Page</a> -->
+            <a href="index.html">Go back to Main Page</a>
     </div>
 
     <script>
-        document.body.style.setProperty('--bg-position', Math.random() * 100 + '%');
-
+        document.body.style.setProperty('--bg-position', Math.random() * 100 + '%'); // randomize the background position on page load
+    // I barely understand eventlisteners and i doubt there is a nice solution to what i want
+        // save the background position to sessionStorage when the page is unloaded
         window.addEventListener('unload', function() {
             var body = document.getElementById('body');
             var bgPosition = window.getComputedStyle(body).getPropertyValue('--bg-position');
             sessionStorage.setItem('bgPosition', bgPosition);
         });
-
+        // restore the background position from sessionStorage when the page is shown
         window.addEventListener('pageshow', function() {
             var body = document.getElementById('body');
             var bgPosition = sessionStorage.getItem('bgPosition');
